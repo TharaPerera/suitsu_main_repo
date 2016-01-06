@@ -1,0 +1,16 @@
+    <%
+    var dataStore = new MetadataStore("admin", "admin");
+    
+     
+    //now we read the resource again
+    var res = dataStore.get("wso2products.xml");
+     
+    //html to show the result
+    var resource = {};
+    resource.content = res.content.toXMLString();
+    resource.props = {};
+    resource.props.url = res.getProperty("url");
+    resource.props.company = res.getProperty("company");
+     
+    print(resource);
+    %>

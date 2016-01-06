@@ -1,0 +1,39 @@
+<%
+var log = new Log();
+
+var url_img = request.getParameter("url");
+var username = request.getParameter("username");
+var time = request.getParameter("time");
+var desc = request.getParameter("desc");
+
+log.info("_______________val____________"+url_img+":"+username+":"+time+":"+desc);
+
+
+function savePivotRequest(){
+	
+	var url = "https://localhost:9444/UserRegistration-1.0-SNAPSHOT/webresources/endpoint/suitsu/savepivotrequest?username=" + username+"&url="+url_img+"&time="+time+"&desc="+desc;
+      var xhr = new XMLHttpRequest();
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.open("GET", url, false);//async=false
+      xhr.send();
+      
+	log.info(xhr.responseText);
+	
+	var result = parse(xhr.responseText.toString());
+		
+		
+		var statusSaved = result.status;
+		
+		if(statusSaved != 1) {
+					log.warn("Couldn't save to 'request' table. ");
+		}else{
+			response.sendRedirect('/request/index.jag?msg=Request added ....');
+		}
+		
+	
+	
+}
+
+savePivotRequest();
+
+%>

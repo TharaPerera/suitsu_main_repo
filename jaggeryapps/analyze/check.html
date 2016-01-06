@@ -1,0 +1,32 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<head></head>
+<body>
+
+	<h3>Hello World</h3>
+
+<script type="text/javascript">
+
+getRequests();
+
+function getRequests(){
+		var url = "https://127.0.0.1:9444/UserRegistration-1.0-SNAPSHOT/webresources/endpoint/user/request/get?username="+ "thara";
+		$.ajax({
+			type: "GET",
+			url:url,
+			async: false,
+			dataType : "json",
+			success:function(result){
+				alert(result)
+				if(result != null) {
+					alert(result);
+				}
+			}
+		}
+			  );
+		//return msisdn;
+	}
+	//getRequests(user);</script>
+</body>
+
+</html>

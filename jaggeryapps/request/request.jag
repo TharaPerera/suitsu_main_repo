@@ -1,0 +1,142 @@
+<%
+var user = require('/modules/user.js').current();
+if (!user) {
+    response.sendRedirect('/request/login');
+}
+%>
+<!DOCTYPE HTML>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- bootstrap -->
+<link href="web/css/bootstrap.min.css" rel='stylesheet' type='text/css' media="all" />
+<!-- //bootstrap -->
+<link href="web/css/dashboard.css" rel="stylesheet">
+<!-- Custom Theme files -->
+<link href="web/css/style.css" rel='stylesheet' type='text/css' media="all" />
+<script src="web/js/jquery-1.11.1.min.js"></script>
+<!--start-smoth-scrolling-->
+<!-- fonts -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+var dresses_1="dresses/dresses_1.jpg";
+var dresses_2="dresses/dresses_2.jpg";
+
+var dresses=[dresses_1, dresses_2];
+
+var blouse_1="blouse/blouse_1.jpg";
+var blouse_2="blouse/blouse_2.jpg";
+var blouse_3="blouse/blouse_2.jpg";
+var blouse_4="blouse/blouse_2.jpg";
+var blouse_5="blouse/blouse_2.jpg";
+
+var blouse=[blouse_1, blouse_2, blouse_3, blouse_4, blouse_5];
+
+
+
+function addimage() {
+
+	var catogory=document.getElementById("catogory").value;
+	alert(catogory);
+	var table = document.getElementById("grid");
+	alert( (""+catogory).length);
+	var rawnum=0;
+
+	table.innerHTML = "";
+
+
+	for (var i = 1; i < ((""+catogory).length+1) ; i++) {
+		var row = table.insertRow(0);
+		var cell1 = row.insertCell(0);
+		var cell2 = row.insertCell(1);
+		var cell3 = row.insertCell(2);
+		var cell4 = row.insertCell(3);
+		cell1.innerHTML = "<img onclick='selected(this)' class='gridImage' src='https://localhost:9443/input/blouse/blouse_"+i+".jpg' alt='' />";
+		cell2.innerHTML = "<img  onclick='selected(this)' class='gridImage' src='https://localhost:9443/input/blouse/blouse_"+(i+1)+".jpg' alt='' />";
+		cell3.innerHTML = "<img  onclick='selected(this)' class='gridImage' src='https://localhost:9443/input/blouse/blouse_"+(i+2)+".jpg' alt='' />";
+		cell4.innerHTML = "<img onclick='selected(this)' class='gridImage' src='https://localhost:9443/input/blouse/blouse_"+(i+3)+".jpg' alt='' />";
+		i=i+3;
+	}
+}
+
+
+function selected(img){
+	alert(img.src);
+	
+	var pivot=document.getElementById("pivot");
+	pivot.src=img.src;
+	var pivorurl = document.getElementById("pivorurl");
+	pivorurl.value=pivot.src;
+	var table = document.getElementById("grid");
+	table.innerHTML = "";
+}
+</script>
+
+
+<div class="upload">
+	<!-- container -->
+	<div class="container">
+		<div class="upload-grids">
+			<div class="box">
+				<form action="saverequest.jag" method="post">
+					<div>
+						
+						<img id="pivot" border="1" class='gridImage'/><br>
+
+							<select class="play-icon popup-with-zoom-anim" id="catogory" onclick="addimage()">
+								<option value="blouse">Blouse</option>
+								<option value="skirt">Skirt</option>
+								<option value="hat">Hat</option>
+								<option value="dresses">Dresses</option>
+							</select> 
+							<table id="grid">
+
+
+
+
+							</table>
+
+
+
+						</div>
+					<input type="text" placeholder="Image" id="pivorurl" required=" " name="url">
+					<input type="text" placeholder="Name" required=" " value="<%= session.get("LOGGED_IN_USER") %>" name="username">			           					   
+					<input type="text" placeholder="Time" required=" " name="time">
+					<input type="text" placeholder="Catogory" required=" " name="desc">
+
+					<textarea placeholder="Aditional details" required=" " name="adesc"></textarea>
+					
+
+						<input type="submit" value="SEND">
+						<div class="clearfix"> </div>
+					</form>
+					
+
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="web/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="js/jquery.gridster.with-extras.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/shindig.js"></script>
+    <script src="js/UESContainer.js"></script>
+    <script src="js/portal-dashboard-designer.js"></script>
